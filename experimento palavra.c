@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 char palavra[10];
+char palavratotal[10];
 int i;
 char letra;
 
@@ -15,31 +17,28 @@ main(){
 		printf("_ ");
 	}
 
+do{
+
 	printf("\nDigite uma letra: ");
 	scanf("%c", &letra);
 	fflush(stdin);
 	
+	for (i=0; palavra[i] != '\0'; i++){
 		
-	for (i=0; palavra[i] != '\0'; i++){
 			if (palavra[i] == letra){
 				printf(" %c", letra);
-				palavra[i] = letra;
+				palavratotal[i] = letra;
+				
 			}
-				else{
-					printf(" _");
+				else if (palavratotal[i] == palavra[i]){
+					printf(" %c", palavratotal[i]);
 				}
+					else{
+						printf(" _");
+					}
 	}
 
-	printf("\nDigite uma letra: ");
-	scanf("%c", &letra);
-
-	for (i=0; palavra[i] != '\0'; i++){
-			if (palavra[i] == letra){
-				printf(" %c", letra);
-				palavra[i] = letra;
-			}
-				else{
-					printf(" _");
-				}
-	}
+}
+	while (strcmp (palavra, palavratotal) == 1 );
+	exit (0);	
 }
