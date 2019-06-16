@@ -30,7 +30,8 @@ char letra;
 float acumulado = 0;
 int premioale;
 int acertos = 0;
-
+int valor_aleatorio;
+int valor_aleatorioP;
 
 
 void gravaDados (void){
@@ -199,22 +200,37 @@ void consultaPremios (void){
 void jogar (void){
 	
 	system("cls");
-	printf("Digite uma palavra: ");
-	gets(palavra);
-	fflush(stdin);
-	strupr(palavra);
-	
 	
 	srand(time(NULL));
 	
+	valor_aleatorioP = 2;
+	
+	FILE *arq;
+	
+	arq = fopen ("palavras.dat", "r");
+	
+	fread(&cdstr, sizeof(cdstr), 1, arq);
+	printf("%s ", cdstr.pista[2]);
+
+	
+/*	printf("Digite uma palavra: ");
+	gets(palavra);
+	fflush(stdin);
+	strupr(palavra);
+*/
+/*	
 	for (i=0; palavra[i] != '\0'; i++){
 		printf("_ ");
 	}
-
+*/
 
 	do{
 		setlocale(LC_ALL, "Portuguese");
-		premioale = rand() % 100;
+		
+		valor_aleatorio = rand() % 12;
+		
+		premioale = premios[valor_aleatorio];
+		
 		printf("\nValendo R$%d.00 por letra.", premioale);
 		
 		printf("\nDigite uma letra: ");
