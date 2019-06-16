@@ -181,7 +181,25 @@ void capturaPremios (void){
 
 void consultaPremios (void){
 	int i;
-	system ("cls");
+	
+	system("cls");
+	printf("===============================================\n");
+	printf("	   RODA A RODA DO SILVIO SANTOS		       \n");
+	printf("===============================================\n");
+	printf("  	   								     	   \n");
+	printf("  	   								     	   \n");
+	printf("  	   								     	   \n");
+	printf("	    4. Consultar Premios			\n");
+	printf("===============================================\n\n");
+	printf("VOCE ESCOLHEU A OPCAO DE CONSULTAR PREMIOS!   \n");
+	printf("Pressione ENTER para continuar.");
+	getch();
+	system("cls");
+	
+	printf("===============================================\n");				
+	printf("	   BANCO DE PREMIOS      		           \n"); 
+	printf("===============================================\n");
+	
 	FILE * arq; 
 		
 	arq = fopen ("premios.dat", "r");
@@ -256,14 +274,14 @@ void admin (void){
 		
 		case 'S':
 		{
-			printf("Voce decidiu sair. O jogo foi encerrado.");
+			printf("\nVoce decidiu SAIR. O jogo foi encerrado.");
 			exit (0);
 		}
 		break;
 		
 		case 's':
 		{
-			printf("Voce decidiu sair. O jogo foi encerrado.");
+			printf("\nVoce decidiu SAIR. O jogo foi encerrado.");
 			exit (0);
 		}
 		break;	
