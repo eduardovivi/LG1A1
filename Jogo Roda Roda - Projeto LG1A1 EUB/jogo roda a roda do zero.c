@@ -185,6 +185,7 @@ void admin (void){
 	system("cls");
 	
 	do{
+		system("cls");
 		printf("===============================================\n");
 		printf("	   RODA A RODA DO SILVIO SANTOS		       \n");
 		printf("===============================================\n");
