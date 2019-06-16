@@ -3,6 +3,8 @@
 #include <string.h>
 #include <conio.h>
 #include <locale.h>
+#include <time.h>
+
 
 //STRUCTS//
 
