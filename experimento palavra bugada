@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+char palavra[10];
+int i;
+char letra;
+
+main(){
+	
+	printf("Digite uma palavra: ");
+	scanf("%s", &palavra);
+	fflush(stdin);
+	
+	for (i=0; palavra[i] != '\0'; i++){
+		printf("_ ");
+	}
+
+	printf("\nDigite uma letra: ");
+	scanf("%c", &letra);
+	fflush(stdin);
+	
+		
+	for (i=0; palavra[i] != '\0'; i++){
+			if (palavra[i] == letra){
+				printf(" %c", letra);
+				palavra[i] = letra;
+			}
+				else{
+					printf(" _");
+				}
+	}
+
+	printf("\nDigite uma letra: ");
+	scanf("%c", &letra);
+
+	for (i=0; palavra[i] != '\0'; i++){
+			if (palavra[i] == letra){
+				printf(" %c", letra);
+				palavra[i] = letra;
+			}
+				else{
+					printf(" _");
+				}
+	}
+}
