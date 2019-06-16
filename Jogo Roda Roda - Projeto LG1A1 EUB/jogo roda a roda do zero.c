@@ -20,6 +20,16 @@ cadastro cdstr;
 char opcao;
 float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
 
+// VARIAVEIS DO JOGO //
+char palavra[10];
+char palavratotal[10];
+int i;
+char letra;
+float acumulado = 0;
+int premioale;
+int acertos = 0;
+
+
 
 void gravaDados (void){
 	
@@ -46,6 +56,7 @@ void consultaPalavras (void){
 	printf("===============================================\n");
 	printf("  	   								     	   \n");
 	printf("	    2. Consultar Palavras		\n");
+	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("===============================================\n\n");
@@ -88,6 +99,7 @@ void capturaDados (void){
 	printf("	   RODA A RODA DO SILVIO SANTOS		       \n");
 	printf("===============================================\n");
 	printf("  	    1. Cadastrar Palavras		\n");
+	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
@@ -149,6 +161,7 @@ void consultaPremios (void){
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("	    3. Consultar Premios(SÓ PRA TESTAR)		\n");
+	printf("  	   								     	   \n");
 	printf("===============================================\n\n");
 	printf("VOCE ESCOLHEU A OPCAO DE CONSULTAR PREMIOS!   \n");
 	printf("Pressione ENTER para continuar.");
@@ -180,6 +193,64 @@ void consultaPremios (void){
 		
 }
 
+void jogar (void){
+	
+	system("cls");
+	printf("Digite uma palavra: ");
+	gets(palavra);
+	fflush(stdin);
+	strupr(palavra);
+	
+	
+	srand(time(NULL));
+	
+	for (i=0; palavra[i] != '\0'; i++){
+		printf("_ ");
+	}
+
+
+	do{
+		setlocale(LC_ALL, "Portuguese");
+		premioale = rand() % 100;
+		printf("\nValendo R$%d.00 por letra.", premioale);
+		
+		printf("\nDigite uma letra: ");
+		scanf("%c", &letra);
+		
+		letra = toupper(letra);
+		
+		fflush(stdin);
+		
+		acertos = 0;
+		for (i=0; palavra[i] != '\0'; i++){
+			
+			if (palavra[i] == letra){
+				printf(" %c", letra);
+				palavratotal[i] = letra;
+				acumulado = acumulado + premioale;
+				acertos++;
+			}
+				else if (palavratotal[i] == palavra[i]){
+					printf(" %c", palavratotal[i]);
+				}
+					else{
+						printf(" _");
+					}
+		}
+		
+		if ( acertos>0){  
+           printf ("\n\nPrêmio acumulado = R$ %.2f", acumulado);
+        }
+        	else{
+          	 printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
+          	}
+          	
+	    getch();
+	    
+	}
+		while (strcmp (palavra, palavratotal) && acertos!=0 );
+		
+}
 void admin (void){
 	
 	system("cls");
@@ -192,6 +263,7 @@ void admin (void){
 		printf("  	    1. Cadastrar Palavras		\n");
 		printf("	    2. Consultar Palavras		\n");
 		printf("	    3. Consultar Premios(SÓ PRA TESTAR)		\n");
+		printf("	    4. JOGAR		\n");
 		printf("	    S. Sair						\n");
 		printf("===============================================\n\n");
 		printf("Escolha uma opcao: ");
@@ -219,6 +291,11 @@ void admin (void){
 				consultaPremios();
 			}
 		break;
+		
+		case '4':
+			{
+				jogar();
+			}
 		
 		case 'S':
 		{
