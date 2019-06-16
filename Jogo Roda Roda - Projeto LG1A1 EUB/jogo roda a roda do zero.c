@@ -57,26 +57,26 @@ void consultaPalavras (void){
 	printf("	   RODA A RODA DO SILVIO SANTOS		       \n");
 	printf("===============================================\n");
 	printf("  	   								     	   \n");
-	printf("	    2. Consultar Palavras		\n");
+	printf("	    2. Consultar Palavras				   \n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
 	printf("===============================================\n\n");
 	printf("VOCE ESCOLHEU A OPCAO DE CONSULTAR PALAVRAS!   \n");
-	printf("Pressione ENTER para continuar.");
+	printf("Pressione qualquer tecla para continuar.");
 	getch();
-	system("cls");
 	
+	system("cls");
 	printf("===============================================\n");				
 	printf("	   BANCO DE DADOS DE PALAVRAS		       \n");
 	printf("===============================================\n"); 
 	FILE * arq; 
 	
-	arq = fopen ("palavras.dat", "r");
+	arq = fopen ("PALAVRAS.dat", "r");
 	
 	if (arq == NULL){
 		system("cls");
-		printf("Ocorreu um erro ao ler o arquivo PALAVRAS.DAT");
+		printf("Ocorreu um erro ao ler o arquivo PALAVRAS.dat");
 	}
 		else{
 			while(!feof(arq)){ // Enquanto não houver o término do arquivo 
@@ -89,7 +89,7 @@ void consultaPalavras (void){
 					}
 			}		
 		}
-	printf("\n\nPressione ENTER para voltar ao MENU PRINCIPAL.");
+	printf("\n\nPressione qualquer tecla para continuar.");
 	getch();
 }
 
@@ -107,13 +107,12 @@ void capturaDados (void){
 	printf("  	   								     	   \n");
 	printf("===============================================\n\n");
 	printf("VOCE ESCOLHEU A OPCAO DE CADASTRO!\n");
-	printf("Pressione ENTER para continuar.");
+	printf("Pressione qualquer tecla para continuar.");
 	getch();
 	
-	system ("cls");
 	
 	int i;
-	
+	system ("cls");
 	printf("===============================================\n");
 	printf("	   CADASTRO DE PALAVRAS     		       \n");
 	printf("===============================================\n");
@@ -121,17 +120,20 @@ void capturaDados (void){
 	fflush(stdin);
 	gets(cdstr.pista);
 	
-	printf("\nInforme a quantidade de palavras a serem cadastradas: ");
-	scanf("%d", &cdstr.qtd);
-	fflush(stdin);
-	
-	for (i=0; i<cdstr.qtd; i++){
-		printf("Digite a %da palavra: ", i + 1);
-		gets(cdstr.vetpalavras[i]);
+	do 
+	{  printf ("\n\nQUANTIDADE DE PALAVRAS: ");
+	fflush (stdin);
+	scanf  ("%i" , &cdstr.qtd);
 	}
-	
+	while (!(cdstr.qtd>=1 && cdstr.qtd<=3));
+	for ( i=0; i<=cdstr.qtd-1; i++)
+	{
+	printf ("\n\n%ia. PALAVRA: ", i+1);   
+	fflush (stdin);
+	gets (cdstr.vetpalavras[i]);
+	}
 	gravaDados();
-	
+	printf("\n\nPressione qualquer tecla para continuar.");
 	getch();
 }
 
@@ -149,7 +151,6 @@ void gravaPremios (void){
 		else{
 				fwrite(&premios, sizeof(premios), 1, arq);
 			}
-	
 	fclose(arq);
 }
 
@@ -166,7 +167,7 @@ void consultaPremios (void){
 	printf("  	   								     	   \n");
 	printf("===============================================\n\n");
 	printf("VOCE ESCOLHEU A OPCAO DE CONSULTAR PREMIOS!   \n");
-	printf("Pressione ENTER para continuar.");
+	printf("Pressione qualquer tecla para continuar.");
 	getch();
 	system("cls");
 	
@@ -190,7 +191,7 @@ void consultaPremios (void){
 		}		
 			
 	fclose(arq);
-	printf("\n\nPressione ENTER para voltar ao MENU PRINCIPAL.");
+	printf("\n\nPressione qualquer tecla para continuar.");
 	getch();
 		
 }
