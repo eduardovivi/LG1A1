@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include <locale.h>
 
 //STRUCTS//
+
 
 typedef struct{
 	char pista[17];
@@ -12,16 +14,11 @@ typedef struct{
 } 
 cadastro;
 
-typedef struct{
-	float premio[12];
-}
-premios;
-
 //VARIÁVEIS GLOBAIS//
 
 cadastro cdstr;
-premios valor;
 char opcao;
+float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
 
 
 void gravaDados (void){
@@ -126,57 +123,20 @@ void capturaDados (void){
 
 void gravaPremios (void){
 	
+	int i;
 	FILE *arq;
 	
-	arq = fopen ("premios.dat", "a"); // Abre um arquivo texto para gravação e leitura. 
-								   	   // Os dados serão adicionados no fim do arquivo se ele já existir, 
-									   // ou um novo arquivo será criado, no caso de arquivo não existente anteriormente.
+	arq = fopen ("premios.dat", "w"); // Cria um premios.dat toda vez que uma consulta é realizada para que não haja repetição dos prêmios
+								   	   
 	if (arq == NULL){ // caso o arquivo dê erro
 		system("cls");
 		printf("Ocorreu um erro ao gravar dados no arquivo PALAVRAS.DAT");
 	}
 		else{
-			fwrite(&valor, sizeof(valor), 1, arq);
-	}
+				fwrite(&premios, sizeof(premios), 1, arq);
+			}
+	
 	fclose(arq);
-}
-
-void capturaPremios (void){
-	
-	
-	system("cls");
-	printf("===============================================\n");
-	printf("	   RODA A RODA DO SILVIO SANTOS		       \n");
-	printf("===============================================\n");
-	printf("  	   								     	   \n");
-	printf("  	   								     	   \n");
-	printf("	    3. Gravar Premios			\n");
-	printf("  	   								     	   \n");
-	printf("===============================================\n\n");
-	printf("VOCE ESCOLHEU A OPCAO DE GRAVAR PREMIOS!   \n");
-	printf("Pressione ENTER para continuar.");
-	getch();
-	system("cls");
-	
-	int i;
-	printf("===============================================\n");				
-	printf("	   CADASTRO DE PREMIOS      		       \n");
-	printf("===============================================\n"); 
-	
-	for (i=0; i<10; i++){
-		printf("Digite o valor do %do premio: ", i + 1);
-		scanf("%f", &valor.premio[i]);
-		fflush(stdin);
-	}
-	
-	gravaPremios();
-	
-	
-	printf("\n\nPressione ENTER para voltar ao MENU PRINCIPAL.");
-	getch();
-
-	
-	
 }
 
 void consultaPremios (void){
@@ -188,8 +148,7 @@ void consultaPremios (void){
 	printf("===============================================\n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
-	printf("  	   								     	   \n");
-	printf("	    4. Consultar Premios			\n");
+	printf("	    3. Consultar Premios(SÓ PRA TESTAR)		\n");
 	printf("===============================================\n\n");
 	printf("VOCE ESCOLHEU A OPCAO DE CONSULTAR PREMIOS!   \n");
 	printf("Pressione ENTER para continuar.");
@@ -204,28 +163,22 @@ void consultaPremios (void){
 		
 	arq = fopen ("premios.dat", "r");
 	
-		if (arq == NULL){
-			system("cls");
-			printf("Ocorreu um erro ao ler o arquivo PREMIOS.DAT");
-		}
-			else{
-				while(!feof(arq)){ // Enquanto não houver o término do arquivo 
-					fread(&valor, sizeof(valor), 1, arq); // É lido todo o arquivo
-						if(!feof(arq)){	// se não houver o término do arquivo, faça:
-							for(i=0;i<10;i++){ //COLOQUEI ATÉ 10 POIS SÃO ARMAZENADOS 10 PRÊMIOS PELO USUÁRIO E +2 PREDEFINIDOS COMO
-											   //OS VALORES DE PASSA A VEZ E PERDE TUDO
-								printf("\nPREMIO %d:[R$ %.2f]", i, valor.premio[i]); 
-							}
-							
-						}
-				}		
-			}
-		fclose(arq);
-		printf("\n\nPressione ENTER para voltar ao MENU PRINCIPAL.");
-		getch();
+	if (arq == NULL){
+		system("cls");
+		printf("Ocorreu um erro ao ler o arquivo PREMIOS.DAT");
+	}
+		else{
+			fread(&premios, sizeof(premios), 1, arq); 
+					for(i=0;i<10;i++){ 
+						printf("\nPREMIO %d:[R$ %.2f]", i + 1, premios[i]); 
+					}					
+		}		
+			
+	fclose(arq);
+	printf("\n\nPressione ENTER para voltar ao MENU PRINCIPAL.");
+	getch();
 		
 }
-
 
 void admin (void){
 	
@@ -237,8 +190,7 @@ void admin (void){
 		printf("===============================================\n");
 		printf("  	    1. Cadastrar Palavras		\n");
 		printf("	    2. Consultar Palavras		\n");
-		printf("	    3. Gravar Premios			\n");
-		printf("	    4. Consultar Premios		\n");
+		printf("	    3. Consultar Premios(SÓ PRA TESTAR)		\n");
 		printf("	    S. Sair						\n");
 		printf("===============================================\n\n");
 		printf("Escolha uma opcao: ");
@@ -262,12 +214,7 @@ void admin (void){
 		
 		case '3':
 			{
-				capturaPremios();
-			}
-		break;
-		
-		case '4':
-			{
+				gravaPremios();
 				consultaPremios();
 			}
 		break;
@@ -289,7 +236,11 @@ void admin (void){
 }
 
 main(){
+
+	setlocale(LC_ALL, "Portuguese");
+	
 	do{
 		admin();
 	} while (opcao != 'S' && opcao != 's');
+	
 }
