@@ -32,6 +32,7 @@ int premioale;
 int acertos = 0;
 int valor_aleatorio;
 int valor_aleatorioP;
+int jogador;
 
 
 void gravaDados (void){
@@ -212,54 +213,59 @@ void jogar (void){
 	for (i=0; palavra[i] != '\0'; i++){
 		printf("_ ");
 	}
-
-
-	do{
-		setlocale(LC_ALL, "Portuguese");
 		
-		valor_aleatorio = rand() % 12;
+	for(jogador=1; jogador <=3; jogador++){
+		printf("\n\nJOGADOR %d", jogador);
 		
-		premioale = premios[valor_aleatorio];
-		
-		printf("\nValendo R$%d.00 por letra.", premioale);
-		
-		printf("\nDigite uma letra: ");
-		scanf("%c", &letra);
-		
-		letra = toupper(letra);
-		
-		fflush(stdin);
-		
-		acertos = 0;
-		for (i=0; palavra[i] != '\0'; i++){
+		do{
+			setlocale(LC_ALL, "Portuguese");
 			
-			if (palavra[i] == letra){
-				printf(" %c", letra);
-				palavratotal[i] = letra;
-				acumulado = acumulado + premioale;
-				acertos++;
-			}
-				else if (palavratotal[i] == palavra[i]){
-					printf(" %c", palavratotal[i]);
+			valor_aleatorio = rand() % 12;
+			
+			premioale = premios[valor_aleatorio];
+			
+			printf("\nValendo R$%d.00 por letra.", premioale);
+			
+			printf("\nDigite uma letra: ");
+			scanf("%c", &letra);
+			
+			letra = toupper(letra);
+			
+			fflush(stdin);
+			
+			acertos = 0;
+			for (i=0; palavra[i] != '\0'; i++){
+				
+				if (palavra[i] == letra){
+					printf(" %c", letra);
+					palavratotal[i] = letra;
+					acumulado = acumulado + premioale;
+					acertos++;
 				}
-					else{
-						printf(" _");
+					else if (palavratotal[i] == palavra[i]){
+						printf(" %c", palavratotal[i]);
 					}
-		}
+						else{
+							printf(" _");
+						}
+			}
+			
+			if ( acertos>0){  
+	           printf ("\n\nPrêmio acumulado = R$ %.2f", acumulado);
+	        }
+	        	else{
+	          	 printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
+	          	}
+	          	
+		    getch();
+		    
 		
-		if ( acertos>0){  
-           printf ("\n\nPrêmio acumulado = R$ %.2f", acumulado);
-        }
-        	else{
-          	 printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
-          	}
-          	
-	    getch();
-	    
+		
+		} while (strcmp (palavra, palavratotal) == 1 && acertos!=0 );
 	}
-		while (strcmp (palavra, palavratotal) && acertos!=0 );
 		
-}
+		
+} 
 void admin (void){
 	
 	system("cls");
