@@ -203,25 +203,22 @@ void jogar (void){
 	
 	system("cls");
 	
-	srand(time(NULL));
+	srand(time(NULL)); //faz com que os números aleatórios "não se repitam"
 	
-
 	printf("Digite uma palavra: ");
 	gets(palavra);
 	fflush(stdin);
-	strupr(palavra);
+	strupr(palavra); //deixa a palavra toda em maiúscula
 	
-
-	
-	printf("\t\t\t\t");
+	printf("\t\t\t\t"); //printa os tracinhos
 	for (i=0; palavra[i] != '\0'; i++){
 		
 		printf("_ ");
 	}
 	
 	
-	for(jogador=1; jogador <=3; jogador++){
-		if (strcmp (palavra, palavratotal) == 0){
+	for(jogador=1; jogador <=3; jogador++){ //faz um loop até chegar no terciro jogador
+		if (strcmp (palavra, palavratotal) == 0){ // caso a palavra adivinhada fique igual à palavra escolhida, o programa para
 			exit(0);
 		}
 		
@@ -229,65 +226,58 @@ void jogar (void){
 		
 		do{
 			system("cls");
-			/*printf("\t\t\t\t");
-			for (i=0; palavra[i] != '\0'; i++){
-		
-			printf("_ ");
-			}*/
-			
 			printf("============================================================================\n");
 			printf("\t\t\t\tJOGO DO RODA A RODA\n");
 			printf("============================================================================\n");
-			printf("\n\n\n\n");
-			printf("\n\nJOGADOR %d", jogador);
+			printf("\n\n\n");
+			printf("\t\t\t\t\tPALAVRA\n");
 			
-			printf("\t\t\t\t");
+			printf("\n\t\t\t\t\t"); // se tiver um caracter que ja foi dito antes e que se encontra na palavra, ele será printado
 			for (i=0; palavra[i] != '\0'; i++){
 				if (palavratotal[i] == palavra[i]){
 					printf(" %c", palavratotal[i]);
 				}
 					else{
-							printf(" _");
+							printf(" _"); // caso contrário, ele printará o tracinho
 						}
 			}
 			
+			printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
+			printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
+			
+			
 			setlocale(LC_ALL, "Portuguese");
 			
-			valor_aleatorio = rand() % 12;
+			valor_aleatorio = rand() % 12; // gera um valor aleatório de 0 até 12 //
 			
-			premioale = premios[valor_aleatorio];
+			premioale = premios[valor_aleatorio]; // armazena em premioale o premio que corresponde ao indice sorteado na linha anterior
 			
-			printf("\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
+			printf("\n\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
 			
-			printf("\n\t\t\t\tDigite uma letra: ");
+			printf("\n\n\t\t\t\tDigite uma letra: ");
 			scanf("%c", &letra);
 			
-			letra = toupper(letra);
-			
+			letra = toupper(letra); //transforma o caractere em maiusculo
 			fflush(stdin);
 			
 			acertos = 0;
-			for (i=0; palavra[i] != '\0'; i++){
+			
+			for (i=0; palavra[i] != '\0'; i++){ //analisa se o caractere digitado se encontra na palavra escolhida
 				
 				if (palavra[i] == letra){
-					//printf(" %c", letra);
 					palavratotal[i] = letra;
 					acumulado = acumulado + premioale;
 					acertos++;
 				}
-					else if (palavratotal[i] == palavra[i]){
-						//printf(" %c", palavratotal[i]);
-					}
-						else{
-							//printf(" _");
-						}
+					
 			}
 			
-			if ( acertos>0){  
+			if ( acertos>0){  //se houver algum acerto, o jogador receberá o prêmio
 	           printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
+	           premio_jogador[jogador] = acumulado;
 	           
 	        }
-	        	else{
+	        	else{ //caso não haja acerto, será passado a vez
 	          	 printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
 	          	 premio_jogador[jogador] = acumulado;
 	          	 printf("\n\nO premio do jogador %d foi R$ %.2f", jogador, acumulado);
@@ -295,10 +285,9 @@ void jogar (void){
 	          	}
 	        system("cls");
 		    getch();
-		    
 		
-		
-		} while (strcmp (palavra, palavratotal) == 1 && acertos!=0 );
+		} while (strcmp (palavra, palavratotal) == 1 && acertos!=0 ); // Realiza o loop enquanto a palavra sorteada não for descoberta
+																	  // totalmente e enquanto os acertos serem diferentes de 0
 	}
 		
 		
