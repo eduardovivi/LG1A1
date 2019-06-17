@@ -254,6 +254,29 @@ void jogar (void){
 		acumulado = 0;
 		
 		do{
+			setlocale(LC_ALL, "Portuguese");
+			
+			valor_aleatorio = rand() % 12; // gera um valor aleatório de 0 até 12 //
+			
+			premioale = premios[valor_aleatorio]; // armazena em premioale o premio que corresponde ao indice sorteado na linha anterior
+			
+			system("cls");
+			printf("==========================================================================================\n");
+			printf("\t\t\t\t    JOGO DO RODA A RODA\n");
+			printf("==========================================================================================\n");
+			printf("\n\n\n");
+			printf("\t\t\t\t\t PALAVRA\n");
+			
+			printf("\n\t\t\t\t      "); // se tiver um caracter que ja foi dito antes e que se encontra na palavra, ele será printado
+			for (i=0; palavra[i] != '\0'; i++){
+				if (palavratotal[i] == palavra[i]){
+					printf(" %c", palavratotal[i]);
+				}
+					else{
+							printf(" _"); // caso contrário, ele printará o tracinho
+						}
+			}
+			pede_outra_letra:
 			
 			system("cls");
 			printf("==========================================================================================\n");
@@ -272,17 +295,6 @@ void jogar (void){
 						}
 			}
 			
-			printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
-			printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
-			
-			
-			setlocale(LC_ALL, "Portuguese");
-			
-			valor_aleatorio = rand() % 12; // gera um valor aleatório de 0 até 12 //
-			
-			premioale = premios[valor_aleatorio]; // armazena em premioale o premio que corresponde ao indice sorteado na linha anterior
-			
-			
 			if (premioale == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
 				goto passaavez;
 			} 
@@ -291,6 +303,8 @@ void jogar (void){
 				goto perdetudo;
 			} 
 			
+			printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
+			printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
 			
 			printf("\n\n\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
 			
@@ -300,6 +314,17 @@ void jogar (void){
 			fflush(stdin);
 			
 			acertos = 0;
+			
+			/////////////////////////////////////VERIFICA SE A LETRA FOI DIGITADA
+			for (i=0; palavra[i] != '\0'; i++){ 
+				
+				if (palavratotal[i] == letra){
+					acertos++;
+					goto pede_outra_letra;
+				}
+					
+			}
+			////////////////////////////////////
 			
 			for (i=0; palavra[i] != '\0'; i++){ //analisa se o caractere digitado se encontra na palavra escolhida
 				
