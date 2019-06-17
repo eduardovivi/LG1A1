@@ -21,9 +21,9 @@ int auxi = 0;
 cadastro dicas[5];
 cadastro cdstr;
 char opcao;
-float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
+float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 2, 300, 500, 700};
 float premio_zero[] = {0, 0};
-
+float premio_perde[] = {2, 2};
 
 // VARIAVEIS DO JOGO //
 char palavra[10];
@@ -287,6 +287,10 @@ void jogar (void){
 				goto passaavez;
 			} 
 			
+			if (premioale == premio_perde[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+				goto perdetudo;
+			} 
+			
 			
 			printf("\n\n\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
 			
@@ -310,6 +314,10 @@ void jogar (void){
 	 		if (premioale == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
 				goto passaavez;
 			} 
+			
+			if (premioale == premio_perde[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+				goto perdetudo;
+			} 
 				
 			if ( acertos>0){  //se houver algum acerto, o jogador receberá o prêmio
 	           //printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
@@ -330,6 +338,21 @@ void jogar (void){
 	        if (premios[valor_aleatorio] == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
 				
 				printf ("\n\n\t\tO JOGADOR %d PERDEU A VEZ, pois o premio sorteado foi 0!", jogador);
+				jogador++;
+				getch();
+			}
+					else if(strcmp (palavra, palavratotal) == 0){
+						goto tela_final;
+					}
+						else{
+							goto inicio_do_for;
+						}
+						
+			perdetudo:
+			if (premios[valor_aleatorio] == premio_perde[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+				
+				printf ("\n\n\t\tO JOGADOR %d PERDEU TUDO, pois o premio sorteado foi 0!", jogador);
+				premio_jogador[jogador] = 0;
 				jogador++;
 				getch();
 			}
