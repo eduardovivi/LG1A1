@@ -283,7 +283,7 @@ void jogar (void){
 			premioale = premios[valor_aleatorio]; // armazena em premioale o premio que corresponde ao indice sorteado na linha anterior
 			
 			
-			if (premios[valor_aleatorio] == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+			if (premioale == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
 				goto passaavez;
 			} 
 			
@@ -306,7 +306,10 @@ void jogar (void){
 				}
 					
 			}
-	 	
+	 		
+	 		if (premioale == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+				goto passaavez;
+			} 
 				
 			if ( acertos>0){  //se houver algum acerto, o jogador receberá o prêmio
 	           //printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
