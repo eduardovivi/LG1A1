@@ -21,7 +21,8 @@ int auxi = 0;
 cadastro dicas[5];
 cadastro cdstr;
 char opcao;
-float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
+//float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
+float premios[] = {100, 900, 600, 1000, 150, 400, 200, 800, 350, 300, 500, 700};
 
 // VARIAVEIS DO JOGO //
 char palavra[10];
@@ -219,6 +220,29 @@ void jogar (void){
 	
 	for(jogador=1; jogador <=3; jogador++){ //faz um loop até chegar no terciro jogador
 		if (strcmp (palavra, palavratotal) == 0){ // caso a palavra adivinhada fique igual à palavra escolhida, o programa para
+			printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
+			getch();
+			system("cls");
+			printf("==========================================================================================\n");
+			printf("\t\t\t\t    JOGO DO RODA A RODA\n");
+			printf("==========================================================================================\n");
+			printf("\n\n\n");
+			printf("\t\t\t\t\t PALAVRA\n");
+			printf("\n\t\t\t\t\t  %s     ", palavra);
+			printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
+			printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
+			
+			if(premio_jogador[1] > premio_jogador[2] && premio_jogador[1] > premio_jogador[2]){
+				printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 1 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[1]);	
+			}
+				else if(premio_jogador[2] > premio_jogador[1] && premio_jogador[2] > premio_jogador[3]){
+					printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 2 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[2]);		
+				}
+					else{
+						printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 3 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[3]);
+					}
+			
+			
 			exit(0);
 		}
 		
@@ -226,13 +250,13 @@ void jogar (void){
 		
 		do{
 			system("cls");
-			printf("============================================================================\n");
-			printf("\t\t\t\tJOGO DO RODA A RODA\n");
-			printf("============================================================================\n");
+			printf("==========================================================================================\n");
+			printf("\t\t\t\t    JOGO DO RODA A RODA\n");
+			printf("==========================================================================================\n");
 			printf("\n\n\n");
-			printf("\t\t\t\t\tPALAVRA\n");
+			printf("\t\t\t\t\t PALAVRA\n");
 			
-			printf("\n\t\t\t\t\t"); // se tiver um caracter que ja foi dito antes e que se encontra na palavra, ele será printado
+			printf("\n\t\t\t\t      "); // se tiver um caracter que ja foi dito antes e que se encontra na palavra, ele será printado
 			for (i=0; palavra[i] != '\0'; i++){
 				if (palavratotal[i] == palavra[i]){
 					printf(" %c", palavratotal[i]);
@@ -252,11 +276,10 @@ void jogar (void){
 			
 			premioale = premios[valor_aleatorio]; // armazena em premioale o premio que corresponde ao indice sorteado na linha anterior
 			
-			printf("\n\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
+			printf("\n\n\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
 			
-			printf("\n\n\t\t\t\tDigite uma letra: ");
+			printf("\n\n\t\t\t\tJogador %d, digite uma letra: ", jogador);
 			scanf("%c", &letra);
-			
 			letra = toupper(letra); //transforma o caractere em maiusculo
 			fflush(stdin);
 			
@@ -273,7 +296,7 @@ void jogar (void){
 			}
 			
 			if ( acertos>0){  //se houver algum acerto, o jogador receberá o prêmio
-	           printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
+	           //printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
 	           premio_jogador[jogador] = acumulado;
 	           
 	        }
@@ -283,8 +306,8 @@ void jogar (void){
 	          	 printf("\n\nO premio do jogador %d foi R$ %.2f", jogador, acumulado);
 	          	 getch();
 	          	}
-	        system("cls");
-		    getch();
+	        
+		    
 		
 		} while (strcmp (palavra, palavratotal) == 1 && acertos!=0 ); // Realiza o loop enquanto a palavra sorteada não for descoberta
 																	  // totalmente e enquanto os acertos serem diferentes de 0
