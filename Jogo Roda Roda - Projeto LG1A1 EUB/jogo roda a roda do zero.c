@@ -360,6 +360,7 @@ void admin (void){
 			{
 				jogar();
 			}
+		break;
 		
 		case 'S':
 		{
