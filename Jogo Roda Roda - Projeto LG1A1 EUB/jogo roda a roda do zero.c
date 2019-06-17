@@ -313,7 +313,7 @@ void jogar (void){
 				
 			if ( acertos>0){  //se houver algum acerto, o jogador receberá o prêmio
 	           //printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
-	           premio_jogador[jogador] = acumulado;
+	           premio_jogador[jogador] = premio_jogador[jogador] + acumulado;
 	           goto inicio_do_for; ////////////////////////////////////////////////////////
 	           
 	        }
