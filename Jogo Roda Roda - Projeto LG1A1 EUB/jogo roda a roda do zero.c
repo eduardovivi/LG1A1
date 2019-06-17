@@ -22,6 +22,7 @@ cadastro dicas[5];
 cadastro cdstr;
 char opcao;
 float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
+float premio_zero[] = {0, 0};
 
 
 // VARIAVEIS DO JOGO //
@@ -200,6 +201,8 @@ void consultaPremios (void){
 		
 }
 
+
+
 void jogar (void){
 	
 	system("cls");
@@ -217,38 +220,41 @@ void jogar (void){
 		printf("_ ");
 	}
 	
-	
-	for(jogador=1; jogador <=3; jogador++){ //faz um loop até chegar no terciro jogador
-		if (strcmp (palavra, palavratotal) == 0){ // caso a palavra adivinhada fique igual à palavra escolhida, o programa para
-			printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
-			getch();
-			system("cls");
-			printf("==========================================================================================\n");
-			printf("\t\t\t\t    JOGO DO RODA A RODA\n");
-			printf("==========================================================================================\n");
-			printf("\n\n\n");
-			printf("\t\t\t\t\t PALAVRA\n");
-			printf("\n\t\t\t\t\t  %s     ", palavra);
-			printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
-			printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
-			
-			if(premio_jogador[1] > premio_jogador[2] && premio_jogador[1] > premio_jogador[2]){
-				printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 1 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[1]);	
-			}
-				else if(premio_jogador[2] > premio_jogador[1] && premio_jogador[2] > premio_jogador[3]){
-					printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 2 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[2]);		
+	jogador = 1;
+	inicio_do_for:
+	while(jogador <= 3){ //faz um loop até chegar no terciro jogador
+		tela_final:
+			if (strcmp (palavra, palavratotal) == 0){ // caso a palavra adivinhada fique igual à palavra escolhida, o programa para
+				printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
+				getch();
+				system("cls");
+				printf("==========================================================================================\n");
+				printf("\t\t\t\t    JOGO DO RODA A RODA\n");
+				printf("==========================================================================================\n");
+				printf("\n\n\n");
+				printf("\t\t\t\t\t PALAVRA\n");
+				printf("\n\t\t\t\t\t  %s     ", palavra);
+				printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
+				printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
+				
+				if(premio_jogador[1] > premio_jogador[2] && premio_jogador[1] > premio_jogador[2]){
+					printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 1 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[1]);	
 				}
-					else{
-						printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 3 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[3]);
+					else if(premio_jogador[2] > premio_jogador[1] && premio_jogador[2] > premio_jogador[3]){
+						printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 2 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[2]);		
 					}
-			
-			
-			exit(0);
-		}
+						else{
+							printf ("\n\n\t\tO JOGO ACABOU E O VENCEDOR FOI O JOGADOR 3 QUE VAI LEVAR PARA CASA R$%.2f!", premio_jogador[3]);
+						}
+				
+				
+				exit(0);
+			}
 		
 		acumulado = 0;
 		
 		do{
+			
 			system("cls");
 			printf("==========================================================================================\n");
 			printf("\t\t\t\t    JOGO DO RODA A RODA\n");
@@ -276,6 +282,12 @@ void jogar (void){
 			
 			premioale = premios[valor_aleatorio]; // armazena em premioale o premio que corresponde ao indice sorteado na linha anterior
 			
+			
+			if (premios[valor_aleatorio] == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+				goto passaavez;
+			} 
+			
+			
 			printf("\n\n\n\t\t\t\tValendo R$%d.00 por letra para o jogador %d", premioale, jogador);
 			
 			printf("\n\n\t\t\t\tJogador %d, digite uma letra: ", jogador);
@@ -294,20 +306,37 @@ void jogar (void){
 				}
 					
 			}
-			
+	 	
+				
 			if ( acertos>0){  //se houver algum acerto, o jogador receberá o prêmio
 	           //printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
 	           premio_jogador[jogador] = acumulado;
+	           goto inicio_do_for; ////////////////////////////////////////////////////////
 	           
 	        }
-	        	else{ //caso não haja acerto, será passado a vez
-	          	 printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
-	          	 premio_jogador[jogador] = acumulado;
-	          	 printf("\n\nO premio do jogador %d foi R$ %.2f", jogador, acumulado);
-	          	 getch();
-	          	}
+					else{
+						printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
+						premio_jogador[jogador] = premio_jogador[jogador];
+						printf("\n\nO premio do jogador %d foi R$ %.2f", jogador, premio_jogador[jogador]);
+						jogador++; ////////////////////////////////////////////////////////////
+						getch();
+				
+	          		}
 	        
-		    
+			passaavez:
+	        if (premios[valor_aleatorio] == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
+				
+				printf ("\n\n\t\tO JOGADOR %d PERDEU A VEZ, pois o premio sorteado foi 0!", jogador);
+				jogador++;
+				getch();
+			}
+					else if(strcmp (palavra, palavratotal) == 0){
+						goto tela_final;
+					}
+						else{
+							goto inicio_do_for;
+						}
+			
 		
 		} while (strcmp (palavra, palavratotal) == 1 && acertos!=0 ); // Realiza o loop enquanto a palavra sorteada não for descoberta
 																	  // totalmente e enquanto os acertos serem diferentes de 0
