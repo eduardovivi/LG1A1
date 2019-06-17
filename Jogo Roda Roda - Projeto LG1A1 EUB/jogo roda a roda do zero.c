@@ -21,8 +21,8 @@ int auxi = 0;
 cadastro dicas[5];
 cadastro cdstr;
 char opcao;
-//float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
-float premios[] = {100, 900, 600, 1000, 150, 400, 200, 800, 350, 300, 500, 700};
+float premios[] = {100, 900, 600, 1000, 0, 400, 200, 800, 0.01, 300, 500, 700};
+
 
 // VARIAVEIS DO JOGO //
 char palavra[10];
