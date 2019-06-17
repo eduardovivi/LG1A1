@@ -33,6 +33,7 @@ int acertos = 0;
 int valor_aleatorio;
 int valor_aleatorioP;
 int jogador;
+float premio_jogador[1];
 
 
 void gravaDados (void){
@@ -86,8 +87,7 @@ void consultaPalavras (void){
 					if(!feof(arq)){	// se não houver o término do arquivo, faça:
 						printf("\nPISTA:[%16s]", cdstr.pista);
 						printf("   QTD:[%2d]", cdstr.qtd);
-						printf("	   PALAVRAS:[%16s] [%16s] [%16s]", cdstr.vetpalavras[0], cdstr.vetpalavras[1], cdstr.vetpalavras[2]);
-						
+						printf("	   PALAVRAS:[%16s] [%16s] [%16s]", cdstr.vetpalavras[0], cdstr.vetpalavras[1], cdstr.vetpalavras[2]);			
 					}
 			}		
 		}
@@ -215,7 +215,12 @@ void jogar (void){
 	}
 		
 	for(jogador=1; jogador <=3; jogador++){
+		if (strcmp (palavra, palavratotal) == 0){
+			exit(0);
+		}
+		
 		printf("\n\nJOGADOR %d", jogador);
+		acumulado = 0;
 		
 		do{
 			setlocale(LC_ALL, "Portuguese");
@@ -251,10 +256,12 @@ void jogar (void){
 			}
 			
 			if ( acertos>0){  
-	           printf ("\n\nPrêmio acumulado = R$ %.2f", acumulado);
+	           printf ("\n\nO Prêmio acumulado do jogador %d foi de R$ %.2f", jogador, acumulado);
 	        }
 	        	else{
 	          	 printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
+	          	 premio_jogador[jogador] = acumulado;
+	          	 printf("\n\nO premio do jogador %d foi R$ %.2f", jogador, acumulado);
 	          	}
 	          	
 		    getch();
