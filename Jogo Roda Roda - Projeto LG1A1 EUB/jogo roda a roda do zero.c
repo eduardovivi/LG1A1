@@ -203,26 +203,16 @@ void jogar (void){
 	
 	srand(time(NULL));
 	
-	valor_aleatorioP = 2;
-	
-	FILE *arq;
-	
-	arq = fopen ("palavras.dat", "r");
-	
-	fread(&cdstr, sizeof(cdstr), 1, arq);
-	printf("%s ", cdstr.pista[2]);
 
-	
-/*	printf("Digite uma palavra: ");
+	printf("Digite uma palavra: ");
 	gets(palavra);
 	fflush(stdin);
 	strupr(palavra);
-*/
-/*	
+	
 	for (i=0; palavra[i] != '\0'; i++){
 		printf("_ ");
 	}
-*/
+
 
 	do{
 		setlocale(LC_ALL, "Portuguese");
