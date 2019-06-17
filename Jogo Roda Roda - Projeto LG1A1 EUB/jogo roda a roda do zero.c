@@ -168,7 +168,7 @@ void consultaPremios (void){
 	printf("===============================================\n");
 	printf("  	   								     	   \n");
 	printf("  	   								     	   \n");
-	printf("	    3. Consultar Premios(SÓ PRA TESTAR)		\n");
+	printf("	    3. Consultar Premios		\n");
 	printf("  	   								     	   \n");
 	printf("===============================================\n\n");
 	printf("VOCE ESCOLHEU A OPCAO DE CONSULTAR PREMIOS!   \n");
@@ -200,8 +200,6 @@ void consultaPremios (void){
 	getch();
 		
 }
-
-
 
 void jogar (void){
 	
@@ -362,7 +360,7 @@ void jogar (void){
 			passaavez:
 	        if (premios[valor_aleatorio] == premio_zero[1]){ //CASO O PREMIO SORTEADO SEJA 0 
 				
-				printf ("\n\n\t\tO JOGADOR %d PERDEU A VEZ, pois o premio sorteado foi 0!", jogador);
+				printf ("\n\n\t\tO JOGADOR %d PERDEU A VEZ", jogador);
 				jogador++;
 				getch();
 			}
@@ -376,7 +374,7 @@ void jogar (void){
 			perdetudo:
 			if (premios[valor_aleatorio] == premio_perde[1]){ //CASO O PREMIO SORTEADO SEJA 0 
 				
-				printf ("\n\n\t\tO JOGADOR %d PERDEU TUDO, pois o premio sorteado foi 0!", jogador);
+				printf ("\n\n\t\tO JOGADOR %d PERDEU TUDO", jogador);
 				premio_jogador[jogador] = 0;
 				jogador++;
 				getch();
@@ -406,7 +404,7 @@ void admin (void){
 		printf("===============================================\n");
 		printf("  	    1. Cadastrar Palavras		\n");
 		printf("	    2. Consultar Palavras		\n");
-		printf("	    3. Consultar Premios(SÓ PRA TESTAR)		\n");
+		printf("	    3. Consultar Premios	\n");
 		printf("	    4. JOGAR		\n");
 		printf("	    S. Sair						\n");
 		printf("===============================================\n\n");
