@@ -27,6 +27,7 @@ float premio_perde[] = {2, 2};
 char chute_jogador1[10];
 char chute_jogador2[10];
 char chute_jogador3[10];
+int jogador_no_momento;
 
 // VARIAVEIS DO JOGO //
 int diferenca;
@@ -309,77 +310,152 @@ void jogar (void){
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////3 TRACINHOOOOOOOOOOS
 			
-			if (diferenca >= 3){
+			if (diferenca >= 4){
+				jogador_no_momento = jogador;	
+				for(jogador= jogador_no_momento; jogador <= jogador_no_momento + 2; jogador++){
+
+						system("cls");
+						
+						printf("==========================================================================================\n");
+						printf("\t\t\t\t    JOGO DO RODA A RODA    HORA DE CHUTAR\n");
+						printf("==========================================================================================\n");
+						printf("\n\n\n");
+						printf("\t\t\t\t\t PALAVRA\n");
 					
-				while(jogador < 3){
-					inicio_diferenca:
-					system("cls");
-					
-					printf("==========================================================================================\n");
-					printf("\t\t\t\t    JOGO DO RODA A RODA    HORA DE CHUTAR\n");
-					printf("==========================================================================================\n");
-					printf("\n\n\n");
-					printf("\t\t\t\t\t PALAVRA\n");
-				
-					printf("\n\t\t\t\t      "); // se tiver um caracter que ja foi dito antes e que se encontra na palavra, ele será printado
-					
-					for (i=0; palavra[i] != '\0'; i++){
-						if (palavratotal[i] == palavra[i]){
-							printf(" %c", palavratotal[i]);
+						printf("\n\t\t\t\t      "); // se tiver um caracter que ja foi dito antes e que se encontra na palavra, ele será printado
+						
+						for (i=0; palavra[i] != '\0'; i++){
+							if (palavratotal[i] == palavra[i]){
+								printf(" %c", palavratotal[i]);
+							}
+								else{
+										printf(" _");
+									}
 						}
-							else{
-									printf(" _");
-								}
-					}
-				
+					
+								
+						printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
+						printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
+						
+						if(jogador_no_momento == 1){
 							
-					printf("\n\n\n\nJOGADOR 1\t\t\t\tJOGADOR 2\t\t\t\tJOGADOR 3", jogador); //ESTRUTURA DO JOGUINHO
-					printf("\n[R$%.2f]\t\t\t\t[R$%.2f]\t\t\t\t[R$%.2f]", premio_jogador[1], premio_jogador[2], premio_jogador[3]); //ESTRUTURA DO JOGUINHO
-					
-					if (jogador == 1){
-						printf("\n\n\t\t\t\tJogador 1, da um chute ae pai: ");
-						gets(chute_jogador1);
-						fflush(stdin);
-						strupr(chute_jogador1);
-					}
-					
-					if(strcmp(chute_jogador1, palavra) == 0){
-						goto tela_final;
-					}
-						else{
-							jogador++;
-						
-						}
-						
-					if (jogador == 2){
-						printf("\n\n\t\t\t\tJogador 2, da um chute ae pai: ");
-						gets(chute_jogador2);
-						fflush(stdin);
-						strupr(chute_jogador2);	
-					}
-					
-					if(strcmp(chute_jogador2, palavra) == 0){
-						goto tela_final;
-					}
-						else{
-							jogador++;	
-						}
-						
-					if (jogador == 3){
-						printf("\n\n\t\t\t\tJogador 3, da um chute ae pai: ");
-						gets(chute_jogador3);
-						fflush(stdin);
-						strupr(chute_jogador3);
-					}
-					
-					if(strcmp(chute_jogador3, palavra) == 0){
-						goto tela_final;
-					}
-						else{
-							jogador++;		
+							if (jogador == 1){
+								printf("\n\n\t\t\t\tJogador 1, da um chute ae pai: ");
+								gets(chute_jogador1);
+								fflush(stdin);
+								strupr(chute_jogador1);
+							}
+							
+							if(strcmp(chute_jogador1, palavra) == 0){
+								exit(0);
+							}
+								
+								
+							if (jogador == 2){
+								printf("\n\n\t\t\t\tJogador 2, da um chute ae pai: ");
+								gets(chute_jogador2);
+								fflush(stdin);
+								strupr(chute_jogador2);	
+							}
+							
+							if(strcmp(chute_jogador2, palavra) == 0){
+								exit(0);
+							}
+								
+								
+							if (jogador == 3){
+								printf("\n\n\t\t\t\tJogador 3, da um chute ae pai: ");
+								gets(chute_jogador3);
+								fflush(stdin);
+								strupr(chute_jogador3);
+							}
+							
+							if(strcmp(chute_jogador3, palavra) == 0){
+								exit(0);
+							}
+								
 						}
 					
-				}
+						if(jogador_no_momento == 2){
+							
+							
+							if (jogador == jogador_no_momento + 2 ){
+								printf("\n\n\t\t\t\tJogador 1, da um chute ae pai: ");
+								gets(chute_jogador1);
+								fflush(stdin);
+								strupr(chute_jogador1);
+							}
+							
+							if(strcmp(chute_jogador1, palavra) == 0){
+								exit(0);
+							}
+							
+								
+								
+							if (jogador == 2){
+								printf("\n\n\t\t\t\tJogador 2, da um chute ae pai: ");
+								gets(chute_jogador2);
+								fflush(stdin);
+								strupr(chute_jogador2);	
+							}
+							
+							if(strcmp(chute_jogador2, palavra) == 0){
+								exit(0);
+							}
+								
+								
+							if (jogador == jogador_no_momento + 1){
+								printf("\n\n\t\t\t\tJogador 3, da um chute ae pai: ");
+								gets(chute_jogador3);
+								fflush(stdin);
+								strupr(chute_jogador3);
+							}
+							
+							if(strcmp(chute_jogador3, palavra) == 0){
+								exit(0);
+							}
+						}
+						
+						if(jogador_no_momento == 3){
+							
+							if (jogador == jogador_no_momento + 1 ){
+								printf("\n\n\t\t\t\tJogador 1, da um chute ae pai: ");
+								gets(chute_jogador1);
+								fflush(stdin);
+								strupr(chute_jogador1);
+							}
+							
+							if(strcmp(chute_jogador1, palavra) == 0){
+								exit(0);
+							}
+								
+								
+							if (jogador == jogador_no_momento + 2){
+								printf("\n\n\t\t\t\tJogador 2, da um chute ae pai: ");
+								gets(chute_jogador2);
+								fflush(stdin);
+								strupr(chute_jogador2);	
+							}
+							
+							if(strcmp(chute_jogador2, palavra) == 0){
+								exit(0);
+							}
+								
+								
+							if (jogador == jogador_no_momento){
+								printf("\n\n\t\t\t\tJogador 3, da um chute ae pai: ");
+								gets(chute_jogador3);
+								fflush(stdin);
+								strupr(chute_jogador3);
+							}
+							
+							if(strcmp(chute_jogador3, palavra) == 0){
+								exit(0);
+							}
+						}
+						
+						
+				}  
 				
 			}
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
