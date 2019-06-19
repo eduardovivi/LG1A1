@@ -238,6 +238,7 @@ void jogar (void){
 	
 	inicio_do_for: //checkpoint
 	
+	comecinho:
 		
 	while(jogador <= 3){ //faz um loop até chegar no terceiro jogador
 		
@@ -530,13 +531,19 @@ void jogar (void){
 		           goto inicio_do_for; 
 		           
 		        }
-						else{ //se nao houver acertos
+						else if (acertos = 0){ //se nao houver acertos
 							printf ("\n\nVocê PERDEU A VEZ, pois a letra informa '%c' NÃO faz parte da palavra", letra);
 							premio_jogador[jogador] = premio_jogador[jogador];
 							printf("\n\nO premio do jogador %d foi R$ %.2f", jogador, premio_jogador[jogador]);
-							jogador++; 
-							getch();
 						}	
+							else if(jogador == 3){
+								jogador = 1;
+								goto comecinho;
+							}
+								else{			
+									jogador++; 
+									getch();
+								}
 				
 		        
 				passaavez: //checkpoint que apresenta o que acontecerá se for sorteado o "passa a vez"
